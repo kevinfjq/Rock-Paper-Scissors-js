@@ -23,22 +23,43 @@ function playRound(){
     let whoWin;
     console.log(computer);
     if(player === computer){
-        whoWin = "tie"
+        whoWin = "tie";
+        console.log("Round: Tie! Both chosed " + player);
     }
     else if(player === "rock" && computer === "scissors" || player === "scissors" && computer === "paper" || player === "paper" && computer === "rock"){
         whoWin = "player";
+        console.log("Round: You Win! " + player.toLocaleUpperCase() + " beats " + computer.toLocaleUpperCase());
     }
     else{
-        whoWin = "computer"
+        whoWin = "computer";
+        console.log("Round: You Lose! " + computer.toLocaleUpperCase() + " beats " + player.toLocaleUpperCase());
     }
-    if(whoWin === "tie"){
-        console.log("Tie! Both chosed " + player);
-    }
-    else if(whoWin === "player"){
-        console.log("You Win! " + player.toLocaleUpperCase() + " beats " + computer.toLocaleUpperCase());
-    }
-    else{
-        console.log("You Lose!" + computer.toLocaleUpperCase() + " beats " + player.toLocaleUpperCase());
+    return whoWin;
+}
+//Make function that start game
+function game(){
+    let playerScore = 0;
+    let computerScore = 0;
+    for(let i = 0; i < 5; i++){
+        let result = playRound();
+        if(result === "player"){
+            playerScore ++;
+        }
+        else if(result === "computer"){
+            computerScore ++;
+        }
+        else{
+            i--;
+        }
+        console.log("Player: " + playerScore + "\nComputer: " + computerScore);
+        if(playerScore === 3){
+            console.log("Player Wins!");
+            return;
+        }
+        else if(computerScore == 3){
+            console.log("Computer Wins!");
+            return;
+        }
     }
 }
-playRound();
+game();
